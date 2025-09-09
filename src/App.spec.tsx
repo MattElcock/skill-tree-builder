@@ -1,9 +1,12 @@
-import { expect, test } from "vitest";
+import { expect, describe, test } from "vitest";
 import { render } from "@testing-library/react";
 import App from "./App";
 
-test("<App/>", () => {
-  const screen = render(<App />);
+describe("<App/>", () => {
+  test("nodes exist", () => {
+    const screen = render(<App />);
 
-  expect(screen.getByText("Hello world")).toBeInTheDocument();
+    expect(screen.getByText("Node 1")).toBeInTheDocument();
+    expect(screen.getByText("Node 2")).toBeInTheDocument();
+  });
 });
