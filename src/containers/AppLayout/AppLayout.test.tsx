@@ -1,6 +1,6 @@
 import { expect, describe, it } from "vitest";
-import { render } from "@testing-library/react";
 import { AppLayout } from "./AppLayout";
+import { render } from "@/helpers/render";
 
 describe("<AppLayout/>", () => {
   it("should render children", () => {

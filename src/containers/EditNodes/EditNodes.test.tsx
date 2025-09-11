@@ -1,10 +1,13 @@
-import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { EditNodes } from "./EditNodes";
+import { render } from "@/helpers/render";
+import { waitForElementToBeRemoved } from "@testing-library/dom";
 
 describe("<EditNodes/>", () => {
-  it("should display nodes", () => {
+  it("should display nodes", async () => {
     const screen = render(<EditNodes />);
+
+    await waitForElementToBeRemoved(() => screen.getByText("Loading"));
 
     const renderedNodes = screen.getAllByRole("listitem");
 

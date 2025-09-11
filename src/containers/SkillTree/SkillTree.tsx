@@ -3,7 +3,13 @@ import "@xyflow/react/dist/style.css";
 import { useSkillTree } from "@/hooks/useSkillTree";
 
 const SkillTree = () => {
-  const { nodes, edges } = useSkillTree();
+  const { data: tree } = useSkillTree();
+
+  if (!tree) {
+    return <p>Loading</p>;
+  }
+
+  const { nodes, edges } = tree;
 
   return <ReactFlow colorMode="dark" nodes={nodes} edges={edges} fitView />;
 };
