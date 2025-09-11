@@ -1,11 +1,11 @@
 import "@xyflow/react/dist/style.css";
 import { AppLayout } from "@/containers/AppLayout";
-import { Tree } from "@/containers/Tree";
+import { SkillTree } from "@/containers/SkillTree";
 
 export default function App() {
   return (
     <AppLayout>
-      <Tree />
+      <SkillTree />
     </AppLayout>
   );
 }

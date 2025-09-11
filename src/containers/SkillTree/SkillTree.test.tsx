@@ -1,6 +1,6 @@
 import { expect, describe, it, vi } from "vitest";
 import { render } from "@testing-library/react";
-import { Tree } from "./Tree";
+import { SkillTree } from "./SkillTree";
 
 vi.mock("@/hooks/useSkillTree", () => ({
   useSkillTree: vi.fn().mockReturnValue({
@@ -22,9 +22,9 @@ vi.mock("@/hooks/useSkillTree", () => ({
   }),
 }));
 
-describe("<Tree/>", () => {
+describe("<SkillTree/>", () => {
   it("should render the tree", () => {
-    const screen = render(<Tree />);
+    const screen = render(<SkillTree />);
 
     expect(screen.getByText("Pottery")).toBeInTheDocument();
     expect(screen.getByText("Irrigation")).toBeInTheDocument();
