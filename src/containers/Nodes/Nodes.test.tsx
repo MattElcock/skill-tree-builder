@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { EditNodes } from "./EditNodes";
+import { Nodes } from "./Nodes";
 import { render } from "@/helpers/render";
 import { waitForElementToBeRemoved } from "@testing-library/dom";
 
-describe("<EditNodes/>", () => {
+describe("<Nodes/>", () => {
   it("should display nodes", async () => {
-    const screen = render(<EditNodes />);
+    const screen = render(<Nodes />);
 
     await waitForElementToBeRemoved(() => screen.getByText("Loading"));
 

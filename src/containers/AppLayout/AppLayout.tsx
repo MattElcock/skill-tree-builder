@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { EditNodes } from "../EditNodes";
+import { Nodes } from "@/containers/Nodes";
 
 interface AppLayoutProps {
   children: ReactNode;
@@ -12,7 +12,7 @@ const Sidebar = () => {
         <h1 className="text-3xl">Skill Tree Builder</h1>
         <p className="text-zinc-300">Build your skill tree</p>
       </header>
-      <EditNodes />
+      <Nodes />
     </div>
   );
 };
