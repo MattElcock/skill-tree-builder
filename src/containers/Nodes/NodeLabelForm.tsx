@@ -1,6 +1,6 @@
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
-import { useEditNode } from "@/hooks/useEditNode";
+import { useEditNodes } from "@/hooks/useEditNodes";
 import { useSkillTree } from "@/hooks/useSkillTree";
 import { Save, X } from "lucide-react";
 import { useForm, type SubmitHandler } from "react-hook-form";
@@ -16,7 +16,7 @@ interface Inputs {
 
 const EditNodeForm = ({ id, closeForm }: EditNodeFormProps) => {
   const { register, handleSubmit } = useForm<Inputs>();
-  const { mutate } = useEditNode(id);
+  const { mutate } = useEditNodes();
   const { data: tree } = useSkillTree();
 
   if (!tree) {
@@ -35,7 +35,15 @@ const EditNodeForm = ({ id, closeForm }: EditNodeFormProps) => {
   }
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    mutate(data.label);
+    const updatedNode = {
+      ...nodeToEdit,
+      data: { ...nodeToEdit.data, label: data.label },
+    };
+    const updatedNodes = tree.nodes.map((node) =>
+      node.id === id ? updatedNode : node
+    );
+    mutate(updatedNodes);
+
     closeForm();
   };
 
