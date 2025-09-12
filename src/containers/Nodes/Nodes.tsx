@@ -3,7 +3,8 @@ import { useSkillTree } from "@/hooks/useSkillTree";
 import type { Node } from "@xyflow/react";
 import { Pencil } from "lucide-react";
 import { useState } from "react";
-import { EditNodeLabelForm } from "./EditNodeLabelForm";
+import { EditNodeLabelForm } from "./NodeLabelForm";
+import { AddNode } from "./AddNode";
 
 interface NodeProps {
   node: Node;
@@ -46,7 +47,7 @@ const Node = ({ node }: NodeProps) => {
   );
 };
 
-const EditNodes = () => {
+const Nodes = () => {
   const { data: tree } = useSkillTree();
 
   if (!tree) {
@@ -57,7 +58,11 @@ const EditNodes = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-2xl">Nodes</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl">Nodes</h2>
+        <AddNode />
+      </div>
+
       <ul className="flex flex-col gap-2">
         {nodes.map((node) => (
           <Node key={node.id} node={node} />
@@ -67,4 +72,4 @@ const EditNodes = () => {
   );
 };
 
-export { EditNodes };
+export { Nodes };
