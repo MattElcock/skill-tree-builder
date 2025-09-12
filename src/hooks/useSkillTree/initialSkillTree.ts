@@ -1,22 +1,23 @@
 import type { SkillTree } from "@/types";
-import type { Node, Edge } from "@xyflow/react";
+import { type Node, type Edge, MarkerType } from "@xyflow/react";
+import { v4 as uuidv4 } from "uuid";
 
 const initialNodes: Node[] = [
-  { id: "n1", position: { x: 0, y: 0 }, data: { label: "Node 1" } },
-  { id: "n2", position: { x: 0, y: 100 }, data: { label: "Node 2" } },
+  { id: uuidv4(), position: { x: 0, y: 0 }, data: { label: "Shipbuilding" } },
+  { id: uuidv4(), position: { x: 0, y: 100 }, data: { label: "Cartography" } },
 ];
 
 const initialEdges: Edge[] = [
   {
-    id: "n1-n2",
-    source: "n1",
-    target: "n2",
-    domAttributes: { "aria-description": "Hello world" },
+    id: uuidv4(),
+    source: initialNodes[0].id,
+    target: initialNodes[1].id,
+    markerEnd: { type: MarkerType.ArrowClosed },
   },
 ];
 
 export const initialSkillTree: SkillTree = {
-  id: "skilltree-1",
+  id: uuidv4(),
   name: "My First Tree",
   nodes: initialNodes,
   edges: initialEdges,
