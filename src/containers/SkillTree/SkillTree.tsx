@@ -25,20 +25,17 @@ const UnwrappedSkillTree = () => {
   const { mutate: editEdges } = useEditEdges();
   const { getNodes, getEdges } = useReactFlow();
 
-  const [showCycleError, setShowCycleError] = useState(false);
+  const [error, setError] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    if (showCycleError) {
-      toast.error(
-        "Whoops! That connection would create a cycle, which isn’t allowed.",
-        {
-          theme: "colored",
-          transition: Slide,
-          onClose: () => setShowCycleError(false),
-        }
-      );
+    if (typeof error === "string") {
+      toast.error(error, {
+        theme: "colored",
+        transition: Slide,
+        onClose: () => setError(undefined),
+      });
     }
-  }, [showCycleError]);
+  }, [error]);
 
   // See https://reactflow.dev/examples/interaction/prevent-cycles
   const isValidConnection = useCallback(
@@ -65,7 +62,9 @@ const UnwrappedSkillTree = () => {
       if (target.id === connection.source) return false;
 
       if (hasCycle(target)) {
-        setShowCycleError(true);
+        setError(
+          "Whoops! That connection would create a cycle, which isn’t allowed."
+        );
         return false;
       } else {
         return true;
