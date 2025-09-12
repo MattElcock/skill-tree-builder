@@ -1,11 +1,19 @@
+import { useEditEdges } from "@/hooks/useEditEdges";
 import { useEditNodes } from "@/hooks/useEditNodes";
 import { useSkillTree } from "@/hooks/useSkillTree";
-import { applyNodeChanges, ReactFlow, type OnNodesChange } from "@xyflow/react";
+import {
+  addEdge,
+  applyNodeChanges,
+  ReactFlow,
+  type OnConnect,
+  type OnNodesChange,
+} from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 
 const SkillTree = () => {
   const { data: tree } = useSkillTree();
-  const { mutate } = useEditNodes();
+  const { mutate: editNodes } = useEditNodes();
+  const { mutate: editEdges } = useEditEdges();
 
   if (!tree) {
     return <p>Loading</p>;
@@ -14,7 +22,11 @@ const SkillTree = () => {
   const { nodes, edges } = tree;
 
   const onNodesChange: OnNodesChange = (changes) => {
-    mutate(applyNodeChanges(changes, nodes));
+    editNodes(applyNodeChanges(changes, nodes));
+  };
+
+  const onConnect: OnConnect = (connection) => {
+    editEdges(addEdge(connection, edges));
   };
 
   return (
@@ -24,6 +36,7 @@ const SkillTree = () => {
       edges={edges}
       fitView
       onNodesChange={onNodesChange}
+      onConnect={onConnect}
     />
   );
 };

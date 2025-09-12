@@ -2,6 +2,7 @@ import { LOCAL_STORAGE_KEY } from "@/constants";
 import { useSkillTree } from "@/hooks/useSkillTree";
 import type { Node } from "@xyflow/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import type { SkillTree } from "@/types";
 
 const useEditNodes = () => {
   const { data: tree } = useSkillTree();
@@ -12,7 +13,7 @@ const useEditNodes = () => {
     if (!tree) {
       throw new Error("No skill tree found");
     }
-    const updatedTree = { ...tree, nodes: updatedNodes };
+    const updatedTree: SkillTree = { ...tree, nodes: updatedNodes };
 
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([updatedTree]));
   };

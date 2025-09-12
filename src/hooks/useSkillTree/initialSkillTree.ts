@@ -1,5 +1,5 @@
+import type { SkillTree } from "@/types";
 import type { Node, Edge } from "@xyflow/react";
-import type { SkillTree } from "./types";
 
 const initialNodes: Node[] = [
   { id: "n1", position: { x: 0, y: 0 }, data: { label: "Node 1" } },
