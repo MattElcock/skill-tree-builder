@@ -1,14 +1,7 @@
 import { LOCAL_STORAGE_KEY } from "@/constants";
-import type { Edge, Node } from "@xyflow/react";
-import { initialSkillTree } from "./initialSkillTree";
+import type { SkillTree } from "@/types";
 import { useQuery } from "@tanstack/react-query";
-
-interface SkillTree {
-  id: string;
-  name: string;
-  nodes: Node[];
-  edges: Edge[];
-}
+import { initialSkillTree } from "./initialSkillTree";
 
 const getTreesFromLocalStorage = (): SkillTree[] => {
   const trees = localStorage.getItem(LOCAL_STORAGE_KEY);

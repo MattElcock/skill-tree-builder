@@ -1,12 +1,25 @@
 import { Button } from "@/components/Button";
-import { useAddNode } from "@/hooks/useAddNode";
+import { useEditNodes } from "@/hooks/useEditNodes";
+import { useSkillTree } from "@/hooks/useSkillTree";
 import { Plus } from "lucide-react";
+import { v4 as uuidv4 } from "uuid";
 
 const AddNode = () => {
-  const { mutate } = useAddNode();
+  const { data: tree } = useSkillTree();
+  const { mutate } = useEditNodes();
 
   const handleAddNode = () => {
-    mutate();
+    if (!tree) {
+      throw new Error("No skill tree found");
+    }
+    mutate([
+      ...tree.nodes,
+      {
+        id: uuidv4(),
+        position: { x: -100, y: -100 },
+        data: { label: "New Node" },
+      },
+    ]);
   };
 
   return (
