@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Nodes } from "../Nodes";
+import { Nodes } from "@/containers/Nodes";
 
 interface AppLayoutProps {
   children: ReactNode;
